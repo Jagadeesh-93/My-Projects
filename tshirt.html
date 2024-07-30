@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FashionStore.Tshirts</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <style>
+        .cart {
+            float: right;
+            width: 40px;
+        }
+        table, td {
+            padding: 65px;
+        }
+        button {
+            background-color: black;
+            color: white;
+        }
+        .one {
+            padding: 5px;
+        }
+        a {
+            text-decoration: none;
+            color: black;
+        }
+        .Q {
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        
+        <form onsubmit="multiSearch(event)" style="padding: 20px; background-color: black;">
+            <a href="cart.html">
+                <i class="fa-solid fa-cart-shopping" style="color: #ffffff; float:right; font-size: 30px;"></i>
+            </a>
+            <input type="search" name="query" placeholder="Search...">
+            <button type="submit">Search</button>
+        </form>
+       
+    </header>
+    <a href="Third.html">
+        <img src="images/homepage.png" width="30px"  class="one" alt="Homepage">  
+    </a>
+    <table>
+        <tr>
+            <td>
+                <div class="mytshirts">
+                    <img src="images/ts1.jpg" width="160px">
+                    <p>Price: 599.00</p>
+                    <input type="number" id="quantity1" value="1" min="1" class="Q">
+                    <button onclick="addToCart('Tshirt1', 599.00, 'images/ts1.jpg', parseInt(document.getElementById('quantity1').value))">Add to Cart</button>
+                </div>
+            </td>
+            <td>
+                <div class="mytshirts">
+                    <img src="images/ts2.jpg" width="180px">
+                    <p>Price: 549.00</p>
+                    <input type="number" id="quantity2" value="1" min="1" class="Q">
+                    <button onclick="addToCart('Tshirt2', 549.00, 'images/ts2.jpg', parseInt(document.getElementById('quantity2').value))">Add to Cart</button>
+                </div>
+            </td>
+            <td>
+                <div class="mytshirts">
+                    <img src="images/ts3.jpg" width="180px">
+                    <p>Price: 499.00</p>
+                    <input type="number" id="quantity3" value="1" min="1" class="Q">
+                    <button onclick="addToCart('Tshirt3', 499.00, 'images/ts3.jpg', parseInt(document.getElementById('quantity3').value))">Add to Cart</button>
+                </div>
+            </td>
+            <td>
+                <div class="mytshirts">
+                    <img src="images/ts4.jpg" width="180px">
+                    <p>Price: 649.00</p>
+                    <input type="number" id="quantity4" value="1" min="1" class="Q">
+                    <button onclick="addToCart('Tshirt4', 649.00, 'images/ts4.jpg', parseInt(document.getElementById('quantity4').value))">Add to Cart</button>
+                </div>
+            </td>
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <td>
+                <div class="anime">
+                    <img src="images/Ats1.jpg" width="170px">
+                    <p>Price: 749.00</p>
+                    <input type="number" id="quantity5" value="1" min="1" class="Q">
+                    <br>
+                    <button onclick="addToCart('AnimeTshirt1', 749.00, 'images/Ats1.jpg', parseInt(document.getElementById('quantity5').value))">Add to Cart</button>
+                </div>
+            </td>
+            <td>
+                <div class="anime">
+                    <img src="images/Ats2.jpg" width="190px">
+                    <p>Price: 749.00</p>
+                    <input type="number" id="quantity6" value="1" min="1" class="Q">
+                    <br>
+                    <button onclick="addToCart('AnimeTshirt2', 749.00, 'images/Ats2.jpg', parseInt(document.getElementById('quantity6').value))">Add to Cart</button>
+                </div>
+            </td>
+            <td>
+                <div class="anime">
+                    <img src="images/Ats3.jpg" width="180px">
+                    <p>Price: 749.00</p>
+                    <input type="number" id="quantity7" value="1" min="1" class="Q">
+                    <br>
+                    <button onclick="addToCart('AnimeTshirt3', 749.00, 'images/Ats3.jpg', parseInt(document.getElementById('quantity7').value))">Add to Cart</button>
+                </div>
+            </td>
+        </tr>
+    </table>
+    <script>
+        function addToCart(name, price, image, quantity) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let existingItem = cart.find(item => item.name === name);
+            
+            if (existingItem) {
+                existingItem.quantity += quantity;
+            } else {
+                cart.push({ name, price, image, quantity });
+            }
+            
+            localStorage.setItem('cart', JSON.stringify(cart));
+            alert('Item added to cart!');
+        }
+
+        function multiSearch(event) {
+            event.preventDefault();  
+            const query = document.querySelector('input[name="query"]').value.toLowerCase();
+            let url;
+
+            if (query.includes('pants')) {
+                url = `/pants.html?query=${query}`;
+            } else if (query.includes('tshirt')) {
+                url = `/tshirt.html?query=${query}`;
+            } else if (query.includes('shoes')) {
+                url = `/shoes.html?query=${query}`;
+            } else if (query.includes('sunglasses') || query.includes('sun glasses')) {
+                url = `/sun-glasses.html?query=${query}`;
+            } else if (query.includes('watches') || query.includes('watch')) {
+                url = `/watches.html?query=${query}`;
+            } else {
+                url = `/default-search.html?query=${query}`;  
+            }
+
+            window.location.href = url;
+        }
+    </script>
+</body>
+</html>
