@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Web App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+        .bg-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+        .search-container {
+            display: flex;
+            margin-bottom: 20px;
+            z-index: 1;
+        }
+        #search-bar {
+            width: 250px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-right: 10px;
+            z-index: 1;
+        }
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            z-index: 1;
+        }
+        .weather-info {
+            text-align: center;
+            margin-top: 20px;
+            z-index: 1;
+        }
+        .forecast {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+            z-index: 1;
+        }
+        .forecast-day {
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+            width: 150px;
+            text-align: center;
+            z-index: 1;
+        }
+        .forecast-day h4 {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <video autoplay loop muted class="bg-video">
+        <source src="weather.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <div class="search-container">
+        <input type="search" id="search-bar" placeholder="Enter city or zip code">
+        <button class="btn" onclick="getWeather()">Get Weather</button>
+    </div>
+
+    <div class="weather-info" id="weather-info"></div>
+
+    <div class="forecast" id="forecast"></div>
+
+    <script>
+        async function getWeather() {
+            const apiKey = 'e9b1b77b898f2b3b3e533a20098aafc0';            
+            const query = document.getElementById('search-bar').value.trim();
+            let url;
+
+            if (/^\d+$/.test(query)) {
+                // Zip code format
+                url = `https://api.openweathermap.org/data/2.5/weather?zip=${query},us&units=metric&appid=${apiKey}`;
+            } else {
+                // City name format
+                url = `https://api.openweathermap.org/data/2.5/weather?q=${query}&units=metric&appid=${apiKey}`;
+            }
+
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                const weatherInfo = document.getElementById('weather-info');
+                const forecast = document.getElementById('forecast');
+                weatherInfo.innerHTML = '';
+                forecast.innerHTML = '';
+
+                if (data.cod === 200) {
+                    const city = data.name;
+                    const country = data.sys.country;
+                    const temp = data.main.temp;
+                    const humidity = data.main.humidity;
+                    const windSpeed = data.wind.speed;
+                    const clouds = data.clouds.all;
+                    const description = data.weather[0].description;
+
+                    weatherInfo.innerHTML = `
+                        <h2>${city}, ${country}</h2>
+                        <p><strong>Temperature:</strong> ${temp}°C</p>
+                        <p><strong>Humidity:</strong> ${humidity}%</p>
+                        <p><strong>Wind Speed:</strong> ${windSpeed} m/s</p>
+                        <p><strong>Cloud Coverage:</strong> ${clouds}%</p>
+                        <p><strong>Condition:</strong> ${description}</p>
+                    `;
+
+                    // Forecast request
+                    const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${query}&units=metric&appid=${apiKey}`;
+                    const forecastResponse = await fetch(forecastUrl);
+                    const forecastData = await forecastResponse.json();
+                    
+                    if (forecastData.cod === "200") {
+                        for (let i = 0; i < 5; i++) {
+                            const forecastDay = forecastData.list[i * 8];
+                            const date = new Date(forecastDay.dt_txt).toLocaleDateString();
+                            const dayTemp = forecastDay.main.temp;
+                            const dayHumidity = forecastDay.main.humidity;
+                            const dayWindSpeed = forecastDay.wind.speed;
+                            const dayDescription = forecastDay.weather[0].description;
+                            const isRainy = forecastDay.weather[0].main.toLowerCase() === 'rain';
+
+                            forecast.innerHTML += `
+                                <div class="forecast-day">
+                                    <h4>${date}</h4>
+                                    <p><strong>Temp:</strong> ${dayTemp}°C</p>
+                                    <p><strong>Humidity:</strong> ${dayHumidity}%</p>
+                                    <p><strong>Wind Speed:</strong> ${dayWindSpeed} m/s</p>
+                                    <p><strong>${dayDescription}</strong></p>
+                                    ${isRainy ? `<p>☔️ Rainy clouds expected</p>` : ''}
+                                </div>
+                            `;
+                        }
+                    } 
+                } else {
+                    weatherInfo.innerHTML = `<p>${data.message}</p>`;
+                }
+            } catch (error) {
+                weatherInfo.innerHTML = `<p>Error fetching weather data. Please try again later.</p>`;
+            }
+        }
+    </script>
+
+</body>
+</html>
