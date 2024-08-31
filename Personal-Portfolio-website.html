@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pilla Jagadeeswar's Portfolio</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        header {
+            background-color: #0D47A1;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        header p {
+            margin: 5px 0;
+        }
+        header a {
+            color: white;
+            text-decoration: none;
+        }
+        nav {
+            background-color: #1565C0;
+            padding: 10px 0;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 1.2rem;
+        }
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 20px auto;
+        }
+        .section-title {
+            font-size: 1.5rem;
+            color: #0D47A1;
+            margin-bottom: 10px;
+        }
+        .section {
+            background-color: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .skills, .education, .certifications, .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .item {
+            background-color: #f9f9f9;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #0D47A1;
+            color: white;
+        }
+        footer a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        .map-section {
+            width: 100%;
+            height: 400px;
+            margin-top: 20px;
+        }
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 2rem;
+            }
+            header p {
+                font-size: 0.9rem;
+            }
+            nav a {
+                font-size: 1rem;
+                margin: 0 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Pilla Jagadeeswar</h1>
+    <p><a href="https://www.linkedin.com/in/jagadeesh-60587531a" target="_blank">LinkedIn</a> | 
+    <a href="https://github.com/Jagadeesh-93" target="_blank">GitHub</a> | 
+    <a href="mailto:pilla.jagadeeswar123@gmail.com">Email</a> | 
+    <span>Phone: +91-7661901641</span></p>
+</header>
+
+<nav>
+    <a href="#summary">Bio</a>
+    <a href="#education">Education</a>
+    <a href="#skills">Skills</a>
+    <a href="#certifications">Certifications</a>
+    <a href="#internship">Internship</a>
+    <a href="#projects">Projects</a>
+    <a href="#location">Location</a>
+</nav>
+
+<div class="container">
+    <section class="section" id="summary">
+        <h2 class="section-title">Bio</h2>
+        <p>Passionate about website development and creating user-friendly designs. While I enjoy coding, my primary interest lies in crafting intuitive and visually appealing user experiences. I am committed to enhancing the usability and aesthetic appeal of digital platforms through thoughtful design and careful consideration of user needs.</p>
+    </section>
+
+    <section class="section education" id="education">
+        <h2 class="section-title">Education</h2>
+        <div class="item">
+            <h3>Prasad V. Potluri Siddhartha Institute of Technology</h3>
+            <p>B.Tech in Information Technology</p>
+            <p>2022 -- Pursuing</p>
+            <p>Vijayawada, Andhra Pradesh</p>
+            <p>CGPA: 8.2/10</p>
+        </div>
+        <div class="item">
+            <h3>Sri Bhavishya Junior College</h3>
+            <p>Intermediate in MPC</p>
+            <p>2020 -- 2022</p>
+            <p>Vijayawada, Andhra Pradesh</p>
+            <p>CGPA: 9.4/10</p>
+        </div>
+    </section>
+
+    <section class="section skills" id="skills">
+        <h2 class="section-title">Skills</h2>
+        <div class="item">
+            <h4>Programming Languages</h4>
+            <p> Java, C, C++</p>
+        </div>
+        <div class="item">
+            <h4>Web Technologies</h4>
+            <p>HTML, CSS, JavaScript</p>
+        </div>
+        <div class="item">
+            <h4>Tools</h4>
+            <p>Git, GitHub</p>
+        </div>
+    </section>
+
+    <section class="section certifications" id="certifications">
+        <h2 class="section-title">Certifications</h2>
+        <div class="item">
+            <h4>Programming in Java</h4>
+            <p>Issued by National Programme on Technology Enhanced Learning (NPTEL)</p>
+        </div>
+        <div class="item">
+            <h4>Database Management System</h4>
+            <p>Issued by National Programme on Technology Enhanced Learning (NPTEL)</p>
+        </div>
+    </section>
+
+    <section class="section internship" id="internship">
+        <h2 class="section-title">Internship</h2>
+        <div class="item">
+            <h3>AI-ML Virtual Internship</h3>
+            <p>April 2024 -- June 2024</p>
+        </div>
+    </section>
+
+    <section class="section projects" id="projects">
+        <h2 class="section-title">Projects</h2>
+        <div class="item">
+            <h4>Fashion-Store</h4>
+            <p>An e-commerce website for online clothing shopping. Users can navigate to different pages using the search bar, add items to the cart, enter their details and card information, and place an order.</p>
+            <p><a href="https://github.com/Jagadeesh-93/My-Projects/tree/main/Fashion-store" target="_blank">GitHub Repository</a></p>
+        </div>
+    </section>
+
+    <section class="map-section" id="location">
+        <h2 class="section-title">My Location</h2>
+        <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3837.194003026307!2d80.60995671489098!3d16.53274588856262!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a35efea8d709369%3A0x14c9441444ce30cb!2sChittinagar%2C%20Fraserpeta%2C%20Vijayawada%2C%20Andhra%20Pradesh%20520001%2C%20India!5e0!3m2!1sen!2sus!4v1692299237381!5m2!1sen!2sus" 
+            width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+    </section>
+
+</div>
+
+<footer>
+    <a href="mailto:pilla.jagadeeswar123@gmail.com">Contact Me</a> 
+</footer>
+
+</body>
+</html>
